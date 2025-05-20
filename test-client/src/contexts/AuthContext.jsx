@@ -5,23 +5,27 @@ import axos from "../axos";
 const AuthContext=createContext();
 export const AuthProvider=({children})=>
 {
-
     const navigate=useNavigate();
     const [user,setUser]=useState(null);
     const [isLoggedIn,setIsLoggedIn]=useState(false);
-    const handleLogin = () => {
+    const handleCookie=()=>{
         const userCookie = Cookies.get("user");
         if (userCookie) {
             try {
                 const userCook = JSON.parse(userCookie);
                 setUser(userCook);
                 setIsLoggedIn(true);
-                navigate("/");
+                return true;
             } catch (err) {
                 console.error("Invalid cookie format:", err);
                 Cookies.remove("user"); // optional: clean up corrupted cookie
             }
         }
+        return false;
+    }
+    const handleLogin = async() => {
+        if(handleCookie())
+            navigate("/");
     };
 
     const logout=async()=>{
@@ -36,15 +40,16 @@ export const AuthProvider=({children})=>
         {
             setUser(null);
             setIsLoggedIn(false);
+            navigate("/");
         }
     }
-    // useEffect(()=>{
-    //     handleLogin();
-    // },[])
+    useEffect(()=>{
+        handleCookie();
+    },[])
     useEffect(()=>{
         //later
     },[user,isLoggedIn]);
-    return (<AuthContext.Provider value={{user,setUser,isLoggedIn,setIsLoggedIn,handleLogin,logout}}>
+    return (<AuthContext.Provider value={{user,setUser,handleCookie,isLoggedIn,setIsLoggedIn,handleLogin,logout}}>
         {children}
     </AuthContext.Provider>);
 }

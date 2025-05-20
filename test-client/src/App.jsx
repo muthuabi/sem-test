@@ -12,6 +12,7 @@ import PageNotFound from './pages/PageNotFound';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { AuthProvider } from './contexts/AuthContext';
+import UsersList from './pages/UsersList';
 function App() {
   return (
    
@@ -25,6 +26,9 @@ function App() {
           <Route path="/" element={<Home />}>
               <Route index element={<HeroSection/>}/>
               <Route path="/about" element={<AboutUs/>}/>
+          </Route>
+          <Route path="/admin/" element={<Home/>}>
+              <Route index element={<UsersList/>}/>
           </Route>
           <Route path="*" element={<PageNotFound/>}/>
         </Routes>
