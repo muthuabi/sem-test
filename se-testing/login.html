@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SE - Testing</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background-color: whitesmoke;
+    }
+
+    .container {
+        display: block;
+        padding: 0 1rem;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    .form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        max-height: 100dvh;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 1.5rem 2rem;
+        width: 300px;
+        max-width: min(500px, 100%);
+        background-color: white;
+        box-shadow: 2px 2px 10px 2px rgb(165, 164, 164);
+        /* border-radius: 5px; */
+    }
+
+    .form-header,
+    .form-footer {
+        display: block;
+        text-align: center;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 100%;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        color: rgb(53, 52, 52);
+    }
+
+    .form-control {
+        border: 0.5px solid gray;
+        border-radius: 2px;
+        font-size: medium;
+        padding: 0.5em;
+        transition: all 0.5s;
+    }
+
+    .form-control:focus-visible {
+        box-shadow: none;
+        border: 0.2px solid gray;
+        outline: none;
+        box-shadow: 0px 0px 5px 2px rgb(168, 213, 233);
+    }
+
+    .btn {
+        border-radius: 5px;
+        border: 0.2px solid gray;
+        background-color: rgb(79, 188, 231);
+        padding: 0.5em;
+        cursor: pointer;
+        font-size: large;
+        transition: all 0.5s;
+    }
+
+    .btn:hover {
+        background-color: rgb(50, 143, 180);
+    }
+
+    a {
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form class="form" id="form">
+                <div class="form-header">
+                    <h2>Login Form</h2>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+                <div class="form-footer">
+                    <span>New Here?</span>&nbsp;<a href="#">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    const users = [
+        { email: "muthuabi@gmail.com", password: "Muthu123" },
+        { email: "krish@gmail.com", password: "Krish123" }
+    ];
+    document.addEventListener("DOMContentLoaded", (event) => {
+        const form = document.getElementById("form");
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const formdata = new FormData(e.target);
+            const data = Object.fromEntries(formdata.entries());
+            let user = users.find((value, index) => value.email == data.email);
+            if(data.email=="krishraj@gmail.com")
+            {
+                alert("Invalid Password");
+                return;
+            }
+            if (!user) {
+                alert("User Not Found");
+                console.log("User Not Found");
+                return;
+            }
+            if (user.password != data.password) {
+                alert("Invalid Password")
+                console.log("Invalid Password");
+                return;
+            }
+            alert("Credentials Validated");
+            console.log("Credentials Validated ", user);
+
+        });
+    })
+</script>
+
+</html>
