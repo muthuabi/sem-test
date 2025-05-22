@@ -21,7 +21,7 @@ test_data = [
         "email": "krish@gmail.com",
         "password": "WrongPass",
         "result": "Pending",
-        "expected": "Invalid Password",  
+        "expected": "Invalid Password",
         "output": ""
     },
     {
@@ -30,7 +30,7 @@ test_data = [
         "email": "krishraj@gmail.com",
         "password": "WrongPass",
         "result": "Pending",
-        "expected": "User Not Found",  
+        "expected": "User Not Found",
         "output": ""
     }
 ]
@@ -81,3 +81,15 @@ finally:
          print(test)
     #  print(test_data)
     #  driver.quit()
+
+#If we use Toast
+#toast = WebDriverWait(driver, 5).until(
+    #EC.presence_of_element_located((By.CSS_SELECTOR, ".Toastify__toast"))
+#)
+#toast_text = toast.text
+#print("Toast Message:", toast_text)
+#data["output"] = toast_text
+#if toast_text == data["expected"]:
+    #data["result"] = "Success"
+#else:
+    #data["result"] = "Failed"
