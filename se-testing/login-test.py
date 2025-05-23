@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.alert import Alert
 from selenium.common.exceptions import NoAlertPresentException
+from webdriver_manager.chrome import ChromeDriverManager
 import time
 # driver=None
 test_data = [
@@ -36,8 +37,8 @@ test_data = [
 ]
 
 try:
-    driver=webdriver.Chrome()
-    driver.get("file:///home/muthukeerthana/Code-Space/se-testing/login.html")
+    driver=webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+    driver.get("http://localhost:5173/login")
     def login_test(data):
         print(f"Test Case-{data["id"]} Processing...")
         input_email=driver.find_element(By.NAME,"email")
